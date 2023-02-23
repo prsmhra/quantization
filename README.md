@@ -4,16 +4,16 @@
 qtensor.py basic operations and how to create quantized tensors.
 
 
-###D2go model
+### D2go model
 
-##Training
+## Training
 
 wrinkles_d2go_traing.py train the quantized mask rcnn model and save the model in torchscript format. this dummy model to test if it able to save model in torchscript format.
 
-##Testing 
+## Testing 
 
 d2go_pred.py test the model and gives the model outputs in console.
 
-#Configs
+## Configs
 contains the configs files for models in model zoo of d2go library and also added the qat_mask_rcnn_*.yaml file to quantized the mask rcnn model.
 
