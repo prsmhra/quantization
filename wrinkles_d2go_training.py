@@ -62,7 +62,6 @@ runner.do_train(cfg, model, resume=False)
 import copy
 from detectron2.data import build_detection_test_loader
 from d2go.export.exporter import convert_and_export_predictor
-#from d2go.export.d2_meta_arch import patch_d2_meta_arch
 
 import logging,time
 print('*'*20)
@@ -89,32 +88,6 @@ predictor_path = convert_and_export_predictor(
 )
 print(f'[INFO] predictor path :{predictor_path}')
 print('[INFO] Toechscript model is saved')
-# recover the logging level
-#right before quitting
-#driver.quit()
-time.sleep(1)
-# logging.disable(previous_level)
-
-from mobile_cv.predictor.api import create_predictor
-from d2go.utils.demo_predictor import DemoPredictor
-
-print('[INFO] Testing the model on test dataset')
-model = create_predictor(predictor_path)
-predictor = DemoPredictor(model)
-
-# dataset_dicts = DatasetCatalog.get('test')
-for d in random.sample(test_dataset_dicts, 3):    
-    im = cv2.imread(d["file_name"])
-    outputs = predictor(im)
-    v = Visualizer(im[:, :, ::-1], metadata=test_metadata, scale=0.8)
-    v = v.draw_instance_predictions(outputs["instances"].to("cpu"))
-    print('[INFO] saving the predicted output')
-    cv2.write(d['file_name'], v.get_image()[:,:,::-1])  
-    plt.figure(figsize = (14, 10))
-    plt.imshow(cv2.cvtColor(v.get_image()[:, :, ::-1], cv2.COLOR_BGR2RGB))
-    plt.show()
-
-
 
 
 
